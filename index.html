@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Random Email Generator</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <form>
+      <label for="email-input">Email:</label>
+      <input type="text" id="email-input" name="email-input" alt="youremail-without@" placeholder="youremail-without@" >
+      <br>
+      <label for="num-chars-input">Number of email addresses:</label>
+      <input type="number" id="num-chars-input" name="num-chars-input" min="1" max="1000" required >
+      <br>
+      <button type="submit">Generate</button>
+    </form>
+    <div id="output-container"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
