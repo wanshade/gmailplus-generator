@@ -2,18 +2,15 @@
 const form = document.querySelector('form');
 const emailInput = document.querySelector('#email-input');
 const numCharsInput = document.querySelector('#num-chars-input');
-const outputContainer = document.querySelector('#output-container');
-
-// Define random character pool
-const randomChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
 // Function to generate a random character
 function generateRandomCharacter() {
-    let randomChar = '';
-    for (let i = 0; i < 8; i++) {
-      randomChar += randomChars[Math.floor(Math.random() * randomChars.length)];
-    }
-    return randomChar;
+  const randomChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let randomChar = '';
+  for (let i = 0; i < 8; i++) {
+    randomChar += randomChars[Math.floor(Math.random() * randomChars.length)];
+  }
+  return randomChar;
 }
 
 // Function to generate email addresses with random characters
@@ -47,6 +44,18 @@ form.addEventListener('submit', (event) => {
   // Generate email addresses with random characters
   const emailAddresses = generateEmailAddresses(numChars);
 
-  // Update output container with email addresses
-  outputContainer.textContent = emailAddresses;
+  // Create a Blob with the email addresses data
+  const blob = new Blob([emailAddresses], { type: 'text/plain' });
+
+  // Create a temporary anchor element
+  const downloadLink = document.createElement('a');
+  downloadLink.href = URL.createObjectURL(blob);
+  downloadLink.download = 'email_addresses.txt';
+
+  // Append the anchor element to the document and click it programmatically
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+
+  // Clean up
+  document.body.removeChild(downloadLink);
 });
